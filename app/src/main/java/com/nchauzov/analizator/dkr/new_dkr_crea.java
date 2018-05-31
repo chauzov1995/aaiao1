@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nchauzov.analizator.DB_sql;
@@ -28,13 +29,13 @@ import java.util.Calendar;
 public class new_dkr_crea extends AppCompatActivity {
 
     Calendar dateAndTime = Calendar.getInstance();
-    int kuda_intent, id;
-    int name_doh_intent, postoyan_intent, summa_intent;
-    String date, komment_intent;
+    int kuda_intent, id,purse_intent;
+       String date;
     SimpleDateFormat ft = new SimpleDateFormat("yyyy.MM.dd");
     Toolbar mToolbar;
     EditText summa_edit, komment_edit;
     AppCompatActivity getact;
+    TextView purse_v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class new_dkr_crea extends AppCompatActivity {
 
         summa_edit = (EditText) findViewById(R.id.summa_edit);
         komment_edit = (EditText) findViewById(R.id.komment_edit);
+        purse_v = (TextView) findViewById(R.id.purse_v);
 
         //для скрытия мягкой клавы
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -73,10 +75,12 @@ public class new_dkr_crea extends AppCompatActivity {
                 int summa = c.getColumnIndex("summa");
                 int komment = c.getColumnIndex("komment");
                 int kuda = c.getColumnIndex("kuda");
+                int purse = c.getColumnIndex("purse");
 
                 komment_edit.setText(c.getString(komment));
                 summa_edit.setText(c.getString(summa));
                 kuda_intent = c.getInt(kuda);
+                purse_intent = c.getInt(purse);
             }
 
         } else {
@@ -130,7 +134,7 @@ public class new_dkr_crea extends AppCompatActivity {
 
 // до сюда
 
-        int purse = 1;
+        int purse = purse_intent;
         int kuda = kuda_intent;
         int summa = Integer.parseInt(summa_edit.getText().toString());
         String komment = komment_edit.getText().toString();

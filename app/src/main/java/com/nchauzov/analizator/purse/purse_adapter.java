@@ -40,8 +40,7 @@ public class purse_adapter extends RecyclerView.Adapter<purse_adapter.ViewHolder
 
     // класс view holder-а с помощью которого мы получаем ссылку на каждый элемент
     // отдельного пункта списка
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener,
-            MenuItem.OnMenuItemClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder  {
         // наш пункт состоит только из одного TextView
         public TextView purse_komment, purse_summa;
         public Button button4;
@@ -55,33 +54,14 @@ public class purse_adapter extends RecyclerView.Adapter<purse_adapter.ViewHolder
 
             purse_komment = (TextView) v.findViewById(R.id.purse_komment);
             purse_summa = (TextView) v.findViewById(R.id.purse_summa);
-
-            v.setOnCreateContextMenuListener(this);
-
-
-        }
+            llitem = (LinearLayout) v.findViewById(R.id.llitem);
 
 
-        @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            menu.setHeaderTitle("Что сделать?");
-
-            MenuItem red = menu.add(this.getAdapterPosition(), v.getId(), 0, "Редактировать");//groupId, itemId, order, title
-            MenuItem del = menu.add(this.getAdapterPosition(), v.getId(), 0, "Удалить");
-
-            red.setOnMenuItemClickListener(this);
-            del.setOnMenuItemClickListener(this);
 
         }
 
-        @Override
-        public boolean onMenuItemClick(final MenuItem item) {
-            // Menu Item Clicked!
 
-            final purse_class d = objects.get(item.getGroupId());
 
-            return true;
-        }
 
 
     }
@@ -120,7 +100,13 @@ public class purse_adapter extends RecyclerView.Adapter<purse_adapter.ViewHolder
 
         holder.purse_komment.setText(p.komment);
         holder.purse_summa.setText(Integer.toString(p.summa));
-
+        holder.llitem.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View r) {
+                Intent intent = new Intent(getactivity, purse_redak.class);
+                intent.putExtra("id", p.id);
+                getactivity.startActivity(intent);
+            }
+        });
 
     }
 

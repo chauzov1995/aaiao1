@@ -71,7 +71,7 @@ public class dodod_activity extends AppCompatActivity
         ArrayList<dohod_class> dohod_list = new ArrayList<dohod_class>();
 
         String startmes_time = "2018.05.01";
-        String endmes_time = "2018.05.31";
+        String endmes_time = "2018.06.31";
 
 
         Cursor c = db.rawQuery("SELECT a.id, a.komment, a.summa_dohod, b.summa_fakt, a.name_dohod" +

@@ -18,6 +18,7 @@ import com.nchauzov.analizator.DB_sql;
 import com.nchauzov.analizator.R;
 import com.nchauzov.analizator.dkr.new_dkr_crea;
 import com.nchauzov.analizator.reports.history_class;
+import com.nchauzov.analizator.reports.reports_activity;
 
 import java.util.ArrayList;
 
@@ -113,14 +114,23 @@ public class purse_activity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.tollbar_new, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int i = item.getItemId();
         if (i == android.R.id.home) {
             onBackPressed();
-        }
+        }  else if (i == R.id.new_menu) {
+            Intent intent = new Intent(this, purse_redak.class);
+            startActivity(intent);
+
+    } else {
+    }
         return true;
     }
 }

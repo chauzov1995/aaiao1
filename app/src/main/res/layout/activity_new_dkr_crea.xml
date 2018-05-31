@@ -13,9 +13,37 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="Учёт" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/purse_v"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Кошелёк" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text=">" />
+
+            <TextView
+                android:id="@+id/doh_v"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Категория" />
+        </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
 

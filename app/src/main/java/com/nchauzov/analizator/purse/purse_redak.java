@@ -30,13 +30,14 @@ public class purse_redak extends AppCompatActivity {
 
     int id_prihod;
     int name_dohod = 1;
+    CheckBox checkBox;
     Activity tecactivity;
     //  Context thiscont;
 
 
     TextView purse_komment;
 
-    Button doh_red_btn;
+    Button purseredakbtn;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,8 @@ public class purse_redak extends AppCompatActivity {
 
 
         purse_komment = (TextView) findViewById(R.id.purse_komment);
-        doh_red_btn = (Button) findViewById(R.id.doh_red_btn);
-
+        purseredakbtn = (Button) findViewById(R.id.purseredakbtn);
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
 
         if (id_prihod != 0) {
             DB_sql dbHelper = new DB_sql(this);
@@ -69,33 +70,43 @@ public class purse_redak extends AppCompatActivity {
             if (c.moveToFirst()) {
                 // определяем номера столбцов по имени в выборке
                 int komment = c.getColumnIndex("komment");
+                int deafault = c.getColumnIndex("deafault");
 
                 purse_komment.setText(c.getString(komment));
-
-
+                boolean cheked=c.getInt(deafault) == 1;
+                checkBox.setChecked(cheked);
+                checkBox.setEnabled(!cheked);
             }
-            doh_red_btn.setText("Сохранить");
+            purseredakbtn.setText("Сохранить");
         } else {
 
-            doh_red_btn.setText("Создать");
+            purseredakbtn.setText("Создать");
         }
 
 
-        doh_red_btn.setOnClickListener(new View.OnClickListener() {
+        purseredakbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
                 DB_sql dbHelper = new DB_sql(tecactivity);
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+                int defal = 0;
+                if (checkBox.isChecked()) {
+                    db.execSQL("UPDATE `an_purse` SET " +
+                            "   `deafault`=0 " +
+                            "   WHERE 1 " );
+                    defal = 1;
+                }
 
                 if (id_prihod != 0) {
                     db.execSQL("UPDATE `an_purse` SET " +
                             "   `komment`='" + purse_komment.getText() + "', " +
+                            "   `deafault`=" + defal + " " +
                             "   WHERE id=" + id_prihod);
                 } else {
-                    db.execSQL("INSERT INTO `an_dohod`" +
-                            "( `summa`, `komment`, `visible`, `deafault`) VALUES" +
-                            " ('0','" + purse_komment.getText().toString() + "',0,0)");
 
+                    db.execSQL("INSERT INTO `an_purse`" +
+                            "( `summa`, `komment`, `visible`, `deafault`) VALUES" +
+                            " (0,'" + purse_komment.getText().toString() + "',0," + defal + ")");
                 }
                 finish();
             }

@@ -22,6 +22,7 @@
         <activity android:name=".reports.reports_activity" android:screenOrientation="portrait"/>
         <activity android:name=".statistics.statistics" android:screenOrientation="portrait"/>
         <activity android:name=".history.history_activity" android:screenOrientation="portrait"/>
+         <activity android:name=".purse.purse_redak" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
