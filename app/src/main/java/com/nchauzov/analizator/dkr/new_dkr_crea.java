@@ -14,28 +14,34 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nchauzov.analizator.DB_sql;
 import com.nchauzov.analizator.R;
+import com.nchauzov.analizator.dohod.dohod_class;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class new_dkr_crea extends AppCompatActivity {
 
     Calendar dateAndTime = Calendar.getInstance();
-    int kuda_intent, id,purse_intent;
-       String date;
+    int kuda_intent, id, purse_intent;
+    String date;
     SimpleDateFormat ft = new SimpleDateFormat("yyyy.MM.dd");
     Toolbar mToolbar;
     EditText summa_edit, komment_edit;
     AppCompatActivity getact;
-    TextView purse_v;
+    Spinner purse_v, doh_v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +59,52 @@ public class new_dkr_crea extends AppCompatActivity {
 
         summa_edit = (EditText) findViewById(R.id.summa_edit);
         komment_edit = (EditText) findViewById(R.id.komment_edit);
-        purse_v = (TextView) findViewById(R.id.purse_v);
+        purse_v = (Spinner) findViewById(R.id.purse_v);
+        doh_v = (Spinner) findViewById(R.id.doh_v);
+
+        DB_sql dbHelper = new DB_sql(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+//Поиск кошельков
+        Cursor c_purse = db.rawQuery("select * from `an_purse` Where visible=0", null);
+        String[] Purse_arr = new String[c_purse.getCount()];
+        if (c_purse.moveToFirst()) {
+            // определяем номера столбцов по имени в выборке
+            int komment = c_purse.getColumnIndex("komment");
+
+            int i = 0;
+            do {
+                Purse_arr[i] = c_purse.getString(komment);
+                i++;
+            } while (c_purse.moveToNext());
+        }
+        c_purse.close();
+
+
+        //Поиск категорий
+        Cursor c_dohod = db.rawQuery("select * from `an_dohod` Where visible=0", null);
+        String[] Dohod_arr = new String[c_dohod.getCount()];
+        if (c_dohod.moveToFirst()) {
+            // определяем номера столбцов по имени в выборке
+            int komment = c_dohod.getColumnIndex("komment");
+
+            int i = 0;
+            do {
+                Dohod_arr[i] = c_dohod.getString(komment);
+                i++;
+            } while (c_dohod.moveToNext());
+        }
+        c_dohod.close();
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Purse_arr);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        purse_v.setAdapter(adapter);
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Dohod_arr);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        doh_v.setAdapter(adapter2);
+
 
         //для скрытия мягкой клавы
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -64,8 +115,7 @@ public class new_dkr_crea extends AppCompatActivity {
         }
 
         if (id != 0) {
-            DB_sql dbHelper = new DB_sql(this);
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
             // делаем запрос всех данных из таблицы mytable, получаем Cursor
             Cursor c = db.rawQuery("select * from `an_dkr_hist` Where id=" + id, null);
             // ставим позицию курсора на первую строку выборки
@@ -82,6 +132,7 @@ public class new_dkr_crea extends AppCompatActivity {
                 kuda_intent = c.getInt(kuda);
                 purse_intent = c.getInt(purse);
             }
+            c.close();
 
         } else {
 
@@ -228,7 +279,7 @@ public class new_dkr_crea extends AppCompatActivity {
         } else if (i == R.id.b43) {
             //Instrumentation inst = new Instrumentation();
 
-          //  summa_edit.getCaret
+            //  summa_edit.getCaret
         } else if (i == R.id.b44) {
             summa_edit.append("=");
         } else if (i == R.id.b45) {
