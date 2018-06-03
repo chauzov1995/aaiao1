@@ -73,21 +73,12 @@
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/znak_vich"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text=""
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/summa_edit"
+                android:id="@+id/numberField"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
 
-
-                android:inputType="numberDecimal"
+                android:gravity="center_horizontal"
                 android:textAlignment="textEnd"
                 android:textSize="50sp" />
 
@@ -104,9 +95,12 @@
             android:id="@+id/komment_edit"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="комментарий"
+            android:background="#ddd"
 
-            android:inputType="textPersonName" />
+            android:hint="комментарий"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -117,6 +111,8 @@
                 android:layout_height="match_parent"
                 android:weightSum="5">
 
+
+
                 <Button
                     android:id="@+id/b11"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -124,10 +120,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text="1"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b12"
@@ -137,10 +134,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text="2"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b13"
@@ -149,10 +147,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text="3"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b14"
@@ -161,28 +160,32 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#777"
-                    android:onClick="calc_click"
-                    android:text="btn"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onOperationClick"
+                    android:text="÷"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
-                <Button
-                    android:id="@+id/b15"
+
+                <ImageButton
+                    android:id="@+id/crea_dkr_kal"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#777"
-                    android:onClick="calc_click"
-                    android:text="btn"
-                    android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:onClick="onOperationClick"
+                    android:src="@drawable/baseline_today_24"
+
+                    android:textSize="30sp" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:weightSum="5">
+
+
 
                 <Button
                     android:id="@+id/b21"
@@ -191,10 +194,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text="4"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b22"
@@ -203,10 +207,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text="5"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b23"
@@ -215,10 +220,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text="6"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b24"
@@ -227,11 +233,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#777"
-                    android:onClick="calc_click"
-                    android:text="-"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onOperationClick"
+                    android:text="×"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
-
+                    android:textSize="30sp" />
                 <Button
                     android:id="@+id/b25"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -239,16 +245,19 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#777"
-                    android:onClick="calc_click"
-                    android:text="%"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onOperationClick"
+                    android:text="="
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:weightSum="5">
+
+
 
                 <Button
                     android:id="@+id/b31"
@@ -257,10 +266,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text="7"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b32"
@@ -269,10 +279,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text="8"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b33"
@@ -281,10 +292,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text="9"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b34"
@@ -293,10 +305,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#777"
-                    android:onClick="calc_click"
-                    android:text="+"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onOperationClick"
+                    android:text="-"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b35"
@@ -305,16 +318,18 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#777"
-                    android:onClick="calc_click"
-                    android:text="x"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onOperationClick"
+                    android:text="ок"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:weightSum="5">
+
 
                 <Button
                     android:id="@+id/b41"
@@ -323,10 +338,11 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text=","
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b42"
@@ -335,22 +351,24 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onNumberClick"
                     android:text="0"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/b43"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#555"
-                    android:onClick="calc_click"
-                    android:text="del"
+
+
+                    android:src="@drawable/baseline_backspace_24"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/b44"
@@ -359,64 +377,26 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#777"
-                    android:onClick="calc_click"
-                    android:text="="
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onOperationClick"
+                    android:text="+"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
 
                 <Button
-                    android:id="@+id/b45"
+                    android:id="@+id/crea_dkr"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:background="#777"
-                    android:onClick="calc_click"
-                    android:text="/"
+                    android:fontFamily="@font/roboto_thin"
+                    android:onClick="onOperationClick"
+                    android:text="@android:string/ok"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="30sp" />
             </TableRow>
         </TableLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/crea_dkr_kal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Календарь"
-                android:textColor="#ffffff" />
-
-
-            <Button
-                android:id="@+id/crea_dkr_to"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Вчера"
-                android:textColor="#ffffff" />
-
-
-            <Button
-                android:id="@+id/crea_dkr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Сегодня"
-                android:textColor="#ffffff" />
-        </LinearLayout>
 
 
     </LinearLayout>
